@@ -19,8 +19,8 @@
 # Default server configuration
 #
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
+	listen 8082 default_server;
+	listen [::]:8082 default_server;
 
 	# SSL configuration
 	#
@@ -55,7 +55,7 @@ server {
 	#
 	location ~ \.php$ {
 		include fastcgi_params;
-        fastcgi_pass php:9000;
+        fastcgi_pass php-service:9000;
         fastcgi_index index.php;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         fastcgi_param PATH_INFO $fastcgi_path_info;
