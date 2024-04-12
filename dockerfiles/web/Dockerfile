@@ -1,5 +1,5 @@
 FROM debian:latest
-RUN apt update && apt upgrade && apt install -y nginx php-fpm
+RUN apt update && apt upgrade && apt install -y nginx php-fpm && service nginx enable
 COPY app-code/. /var/www/html/
-COPY . /etc/nginx/
+COPY dockerfiles/web/config/. /etc/nginx/
 EXPOSE 80
