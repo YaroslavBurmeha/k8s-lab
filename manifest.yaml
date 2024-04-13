@@ -79,6 +79,7 @@ spec:
     - protocol: TCP  # Протокол TCP
       port: 80  # Порт доступа к веб-приложению
       targetPort: 80  # Порт, на котором веб-приложение слушает
+  type: ClusterIP
 
 ---
 
@@ -123,4 +124,12 @@ metadata:
   namespace: webapp-namespace  # Пространство имен, где Ingress будет создан
 spec:
   rules:
-    - host: k8snode1.navbahorholding.uz
+    - http:
+        path:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: webapp
+              port:
+                number: 80
