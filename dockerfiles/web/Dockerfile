@@ -3,4 +3,4 @@ RUN apt update && apt install -y nginx php8.2-fpm
 COPY app-code/. /var/www/html/
 COPY dockerfiles/web/config/. /etc/nginx/
 EXPOSE 80
-CMD ["nginx","-g","daemon off;"]
+CMD ["nginx","-g","daemon off;", "&&", "php8.2-fpm", "-g", "daemon off;"]
