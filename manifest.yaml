@@ -114,7 +114,7 @@ spec:
     spec:
       containers:
         - name: webapp  # Имя контейнера
-          image: zloyejikad/k8s-lab:v38  # Образ контейнера с вашим PHP приложением
+          image: zloyejikad/k8s-lab:v41  # Образ контейнера с вашим PHP приложением
           ports:
             - containerPort: 80  # Порт контейнера, на котором PHP приложение слушает
         - name: php
