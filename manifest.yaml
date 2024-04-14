@@ -126,7 +126,7 @@ spec:
     spec:
       containers:
         - name: webapp  # Имя контейнера
-          image: zloyejikad/k8s-lab:v1  # Образ контейнера с вашим PHP приложением
+          image: zloyejikad/k8s-lab:latest  # Образ контейнера с вашим PHP приложением
           ports:
             - containerPort: 80  # Порт контейнера, на котором PHP приложение слушает
           volumeMounts:
