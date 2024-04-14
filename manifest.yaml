@@ -41,7 +41,7 @@ metadata:
   namespace: webapp-namespace
 spec:
   accessModes:
-    - ReadOnlyMany
+    - ReadOnlyOnce
   resources:
     requests:
       storage: 1Gi
