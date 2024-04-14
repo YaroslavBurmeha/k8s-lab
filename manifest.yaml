@@ -53,7 +53,7 @@ metadata:
   name: webapp-pvc
   namespace: webapp-namespace
 spec:
-  accsesModes:
+  accessModes:
     - ReadWriteOnce
   resources:
     requests:
