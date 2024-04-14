@@ -34,19 +34,6 @@ spec:
 
 ---
 
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: webapp-pvc
-  namespace: webapp-namespace
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
----
-
 apiVersion: apps/v1  # Версия API Kubernetes
 kind: Deployment  # Тип ресурса - деплоймент
 metadata:
@@ -117,12 +104,9 @@ spec:
           ports:
             - containerPort: 80  # Порт контейнера, на котором PHP приложение слушает
         - name: php
-          image: php:7.2-fpm
+          image: php:8.2-fpm
           ports:
               - containerPort: 9000
-          volumeMounts:
-            - name: webapp-storage
-              mountPath: /var/www/html
           env:
             - name: DB_HOST  # Переменная окружения для хоста базы данных
               value: database  # Значение переменной окружения - имя сервиса базы данных
@@ -134,10 +118,7 @@ spec:
               value: "123@Qwerty"  # Значение переменной окружения - ваш пароль
             - name: DB_NAME  # Переменная окружения для названия базы данных
               value: "k8sTEST"  # Значение переменной окружения - название вашей базы данных
-      volumes:
-        - name: webapp-storage
-          persistentVolumeClaim:
-            claimName: webapp-pvc
+
 
 ---
 
