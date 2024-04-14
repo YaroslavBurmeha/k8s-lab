@@ -117,6 +117,9 @@ spec:
           image: zloyejikad/k8s-lab:v41  # Образ контейнера с вашим PHP приложением
           ports:
             - containerPort: 80  # Порт контейнера, на котором PHP приложение слушает
+          volumeMounts:
+            - name: code-storage
+              mountPath: /var/www/html
         - name: php
           image: php:8.2-fpm
           ports:
