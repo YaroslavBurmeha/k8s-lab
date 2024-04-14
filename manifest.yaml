@@ -19,19 +19,6 @@ spec:
       targetPort: 3306  # Порт, на котором поды базы данных слушают
 
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: php
-  namespace: webapp-namespace
-spec:
-  selector:
-    app: php
-  ports:
-    - protocol: TCP
-      port: 9000
-      targetPort: 9000
----
 
 apiVersion: v1  # Версия API Kubernetes
 kind: PersistentVolumeClaim  # Тип ресурса - запрос на постоянный том
@@ -129,6 +116,10 @@ spec:
           image: zloyejikad/k8s-lab:v25  # Образ контейнера с вашим PHP приложением
           ports:
             - containerPort: 80  # Порт контейнера, на котором PHP приложение слушает
+        - name: php
+          image: php:7.2-fpm
+          ports:
+              - containerPort: 9000
           volumeMounts:
             - name: webapp-storage
               mountPath: /var/www/html
@@ -143,36 +134,6 @@ spec:
               value: "123@Qwerty"  # Значение переменной окружения - ваш пароль
             - name: DB_NAME  # Переменная окружения для названия базы данных
               value: "k8sTEST"  # Значение переменной окружения - название вашей базы данных
-      volumes:
-        - name: webapp-storage
-          persistentVolumeClaim:
-            claimName: webapp-pvc
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: php
-  namespace: webapp-namespace
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: webapp
-  template:
-    metadata:
-      labels:
-        app: webapp
-    spec:
-      containers:
-        - name: php
-          image: php:7.2-fpm
-          ports:
-            - containerPort: 9000
-          volumeMounts:
-            - name: webapp-storage
-              mountPath: /var/www/html
       volumes:
         - name: webapp-storage
           persistentVolumeClaim:
