@@ -24,13 +24,13 @@ kind: Service
 metadata:
   name: php
   namespace: webapp-namespace
-  spec:
-    selector:
-      app: php
-    ports:
-      - protocol: TCP
-        port: 9000
-        targetPort: 9000
+spec:
+  selector:
+    app: php
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: 9000
 ---
 
 apiVersion: v1  # Версия API Kubernetes
