@@ -155,28 +155,28 @@ kind: Deployment
 metadata:
   name: php
   namespace: webapp-namespace
-  spec:
-    replicas: 3
-    selector:
-      matchLabels:
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
         app: webapp
-    template:
-      metadata:
-        labels:
-          app: webapp
-      spec:
-        containers:
-          - name: php
-            image: php:7.2-fpm
-            ports:
-              - containerPort: 9000
-            volumeMounts:
-              - name: webapp-storage
-                mountPath: /var/www/html
-        volumes:
-          - name: webapp-storage
-            persistentVolumeClaim:
-              claimName: webapp-pvc
+    spec:
+      containers:
+        - name: php
+          image: php:7.2-fpm
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: webapp-storage
+              mountPath: /var/www/html
+      volumes:
+        - name: webapp-storage
+          persistentVolumeClaim:
+            claimName: webapp-pvc
 
 ---
 
