@@ -34,20 +34,6 @@ spec:
 
 ---
 
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: code-pvc
-  namespace: webapp-namespace
-spec:
-  accessModes:
-    - ReadOnlyMany
-  resources:
-    requests:
-      storage: 1Gi
-
----
-
 apiVersion: apps/v1  # Версия API Kubernetes
 kind: Deployment  # Тип ресурса - деплоймент
 metadata:
@@ -118,14 +104,14 @@ spec:
           ports:
             - containerPort: 80  # Порт контейнера, на котором PHP приложение слушает
           volumeMounts:
-            - name: code-storage
+            - name: shared-data
               mountPath: /var/www/html
         - name: php
           image: php:8.2-fpm
           ports:
               - containerPort: 9000
           volumeMounts:
-            - name: code-storage
+            - name: shared-data
               mountPath: /var/www/html
           env:
             - name: DB_HOST  # Переменная окружения для хоста базы данных
@@ -139,9 +125,8 @@ spec:
             - name: DB_NAME  # Переменная окружения для названия базы данных
               value: "k8sTEST"  # Значение переменной окружения - название вашей базы данных
       volumes:
-        - name: code-storage  # Имя тома
-          persistentVolumeClaim:
-            claimName: code-pvc
+        - name: shared-data # Имя тома
+          emptyDir: {}
 
 
 ---
