@@ -40,7 +40,7 @@ metadata:
   name: database  # Имя деплоймента базы данных
   namespace: webapp-namespace  # Пространство имен, где деплоймент будет создан
 spec:
-  replicas: 2  # Количество реплик (подов) - 1
+  replicas: 1  # Количество реплик (подов) - 1
   selector:
     matchLabels:
       app: database  # Выбор подов с меткой "app: database" для управления ими
