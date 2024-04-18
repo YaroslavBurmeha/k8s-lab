@@ -89,7 +89,7 @@ metadata:
   name: webapp  # Имя деплоймента веб-приложения
   namespace: webapp-namespace  # Пространство имен, где деплоймент будет создан
 spec:
-  replicas: 2  # Количество реплик (подов) - 1
+  replicas: 1  # Количество реплик (подов) - 1
   selector:
     matchLabels:
       app: webapp  # Выбор подов с меткой "app: webapp" для управления ими
