@@ -106,7 +106,7 @@ spec:
           command:
             - "bash"
             - "-c"
-            - "cp -r /usr/src/app/ . /var/www/html && chown -R www-data:www-data /var/www/html"
+            - "cp -r /usr/src/app/. /var/www/html && chown -R www-data:www-data /var/www/html"
           volumeMounts:
             - name: shared-data
               mountPath: /var/www/html
