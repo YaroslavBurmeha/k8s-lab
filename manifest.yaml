@@ -100,11 +100,11 @@ spec:
     spec:
       containers:
         - name: webapp  # Имя контейнера
-          image: zloyejikad/k8s-lab:v42  # Образ контейнера с вашим PHP приложением
+          image: zloyejikad/k8s-lab:v42  # Образ контейнера с вашим приложением
           ports:
-            - containerPort: 80  # Порт контейнера, на котором PHP приложение слушает
+            - containerPort: 80  # Порт контейнера, на котором приложение слушает
           command:
-            - "bash"
+            - "bin/sh"
             - "-c"
             - "cp -r /usr/src/app/index.html /var/www/html/index.html"
           volumeMounts:
