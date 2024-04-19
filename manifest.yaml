@@ -104,7 +104,7 @@ spec:
           ports:
             - containerPort: 80  # Порт контейнера, на котором приложение слушает
           command: 
-            - "bin/sh"
+            - "/bin/sh"
             - "-c"
             - "cp /usr/src/app/index.html /var/www/html/index.html"
           volumeMounts:
