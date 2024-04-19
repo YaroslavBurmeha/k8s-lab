@@ -103,7 +103,10 @@ spec:
           image: zloyejikad/k8s-lab:v42  # Образ контейнера с вашим PHP приложением
           ports:
             - containerPort: 80  # Порт контейнера, на котором PHP приложение слушает
-          command: ["bash", "cp -r /usr/src/app/. /var/www/html && chown -R www-data:www-data /var/www/html"]
+          command:
+            - "bash"
+            - "-c"
+            - "cp -r /usr/src/app. /var/www/html && chown -R www-data:www-data /var/www/html"
           volumeMounts:
             - name: shared-data
               mountPath: /var/www/html
