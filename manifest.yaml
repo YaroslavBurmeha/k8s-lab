@@ -103,10 +103,10 @@ spec:
           image: zloyejikad/k8s-lab:v42  # Образ контейнера с вашим приложением
           ports:
             - containerPort: 80  # Порт контейнера, на котором приложение слушает
-          command:
+          command: 
             - "bin/sh"
             - "-c"
-            - "cp -r /usr/src/app/index.html /var/www/html/index.html"
+            - "cp /usr/src/app/index.html /var/www/html/index.html"
           volumeMounts:
             - name: shared-data
               mountPath: /var/www/html
