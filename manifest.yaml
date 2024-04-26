@@ -154,11 +154,11 @@ spec:
               number: 80
   - host: k8snode2.navbahorholding.uz
     http:
-    paths:
-    - path: /index.php
-      pathType: Prefix
-      backend:
-        service:
-          name: webapp
-          port:
-            number: 80
+      paths:
+      - path: /index.php
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp
+            port:
+              number: 80
