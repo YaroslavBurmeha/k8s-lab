@@ -145,8 +145,8 @@ spec:
   - host: k8snode1.navbahorholding.uz
     http:
       paths:
-      - path: /
-        pathType: Prefix
+      - path: /index.html
+        pathType: Exact
         backend:
           service:
             name: webapp
@@ -156,7 +156,7 @@ spec:
     http:
       paths:
       - path: /index.php
-        pathType: Prefix
+        pathType: Exact
         backend:
           service:
             name: webapp
