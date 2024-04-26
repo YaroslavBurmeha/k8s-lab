@@ -145,18 +145,8 @@ spec:
   - host: k8snode1.navbahorholding.uz
     http:
       paths:
-      - path: /index.html
-        pathType: Exact
-        backend:
-          service:
-            name: webapp
-            port:
-              number: 80
-  - host: k8snode2.navbahorholding.uz
-    http:
-      paths:
-      - path: /index.php
-        pathType: Exact
+      - path: /
+        pathType: Prefix
         backend:
           service:
             name: webapp
