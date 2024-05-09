@@ -100,7 +100,7 @@ spec:
     spec:
       containers:
         - name: webapp  # Имя контейнера
-          image: zloyejikad/k8s-lab:v42  # Образ контейнера с вашим приложением
+          image: zloyejikad/k8s-lab:BuildNumber # Образ контейнера с вашим приложением
           ports:
             - containerPort: 80  # Порт контейнера, на котором приложение слушает
           lifecycle:
