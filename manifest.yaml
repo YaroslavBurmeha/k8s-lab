@@ -100,7 +100,7 @@ spec:
     spec:
       containers:
         - name: webapp  # Имя контейнера
-          image: 192.168.59.250/app:BuildNumber # Образ контейнера с вашим приложением
+          image: 192.168.59.250:5000/app:BuildNumber # Образ контейнера с вашим приложением
           ports:
             - containerPort: 80  # Порт контейнера, на котором приложение слушает
           lifecycle:
