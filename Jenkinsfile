@@ -20,15 +20,14 @@ pipeline {
 				label 'k8s'
 			}
 			steps{
-				dir('k8s-lab'){
-					sh 'pwd'
-					sh 'ls'
-				    sh 'git pull'
-				    sh 'cp manifest.yaml manifest_prod.yaml'
-				    sh 'sed -i "s/BuildNumber/$BUILD_NUMBER/g" manifest_prod.yaml'
-				    sh 'cat manifest_prod.yaml | grep 192.168.59.250'
-				    sh 'kubectl apply -f manifest_prod.yaml'
-				}
+				sh 'pwd'
+				sh 'ls'
+				sh 'git pull'
+				sh 'cp manifest.yaml manifest_prod.yaml'
+				sh 'sed -i "s/BuildNumber/$BUILD_NUMBER/g" manifest_prod.yaml'
+				sh 'cat manifest_prod.yaml | grep 192.168.59.250'
+				sh 'kubectl apply -f manifest_prod.yaml'
+				
 			}
 		}
 	}
