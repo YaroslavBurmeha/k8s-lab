@@ -22,6 +22,7 @@ pipeline {
 			steps{
 				dir('k8s-lab'){
 					sh 'pwd'
+					sh 'ls'
 				    sh 'git pull'
 				    sh 'cp manifest.yaml manifest_prod.yaml'
 				    sh 'sed -i "s/BuildNumber/$BUILD_NUMBER/g" manifest_prod.yaml'
