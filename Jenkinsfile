@@ -20,8 +20,6 @@ pipeline {
 				label 'k8s'
 			}
 			steps{
-				sh 'pwd'
-				sh 'ls'
 				sh 'git pull origin main'
 				sh 'cp manifest.yaml manifest_prod.yaml'
 				sh 'sed -i "s/BuildNumber/$BUILD_NUMBER/g" manifest_prod.yaml'
