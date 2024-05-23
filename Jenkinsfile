@@ -8,10 +8,7 @@ pipeline {
 			}
 			steps{
 				sh 'echo "Номер билда: "$BUILD_NUMBER'
-				script{
-					def Hash = sh(script: 'git rev-parse HEAD | head -c 7', returnStdout: true).trim()
-				}
-				sh 'curl -X POST "https://api.telegram.org/bot6991480940:AAGM38za6G7f6d8gZT5jirGRBZe2ICeXjL0/sendMessage" -d "chat_id=1341857329&text=билд под номером:$BUILD_NUMBER начал сборку git_commit_hash=${Hash}"'
+				sh 'curl -X POST "https://api.telegram.org/bot6991480940:AAGM38za6G7f6d8gZT5jirGRBZe2ICeXjL0/sendMessage" -d "chat_id=1341857329&text=билд под номером:$BUILD_NUMBER начал сборку"'
 				dir('k8s-lab'){
 				    sh 'git pull'
 				    sh 'docker build --no-cache -f dockerfiles/web/Dockerfile . -t 192.168.59.250:5000/app:$BUILD_NUMBER'
