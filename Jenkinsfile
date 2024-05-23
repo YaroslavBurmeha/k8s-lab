@@ -8,8 +8,7 @@ pipeline {
 			}
 			steps{
 				sh 'echo "Номер билда: "$BUILD_NUMBER'
-				sh 'commit_hash=$(git log | grep commit | sed -n "s/commit \([0-9a-f]\{8\}\).*/\1/p" | head -c 8)'
-				sh 'curl -X POST "https://api.telegram.org/bot6991480940:AAGM38za6G7f6d8gZT5jirGRBZe2ICeXjL0/sendMessage" -d "chat_id=1341857329&text=билд под номером:$BUILD_NUMBER начал сборку git_commit_hash=$commit_hash"'
+				sh 'curl -X POST "https://api.telegram.org/bot6991480940:AAGM38za6G7f6d8gZT5jirGRBZe2ICeXjL0/sendMessage" -d "chat_id=1341857329&text=билд под номером:$BUILD_NUMBER начал сборку git_commit_hash=${env.GIT_COMMIT}"'
 				dir('k8s-lab'){
 				    sh 'git pull'
 				    sh 'docker build --no-cache -f dockerfiles/web/Dockerfile . -t 192.168.59.250:5000/app:$BUILD_NUMBER'
