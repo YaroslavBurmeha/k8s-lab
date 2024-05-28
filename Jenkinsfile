@@ -29,15 +29,6 @@ pipeline {
 				sh 'kubectl apply -f manifest_prod.yaml'
 				sh 'curl -X POST "https://api.telegram.org/bot6991480940:AAGM38za6G7f6d8gZT5jirGRBZe2ICeXjL0/sendMessage" -d "chat_id=1341857329&text=билд под номером:$BUILD_NUMBER был успешно задеплоен в кластер kubernetes желаем вам удачи! \n ----------"'
 			}
-		}
-    	stage('Check URL') {
-   	    	def response = sh(script: 'curl -o /dev/null -s -w "%{http_code}" http://k8snode1.navbahorholding.uz', returnStdout: true).trim()
-    	    	if (response == '200') {
-   	         		sh 'curl -X POST "https://api.telegram.org/bot6991480940:AAGM38za6G7f6d8gZT5jirGRBZe2ICeXjL0/sendMessage" -d "chat_id=1341857329&text=приложении отвечает на запрос curl"'
-   	     		} 
-   	     		else {
-  	          		sh 'curl -X POST "https://api.telegram.org/bot6991480940:AAGM38za6G7f6d8gZT5jirGRBZe2ICeXjL0/sendMessage" -d "chat_id=1341857329&text=приложении не отвечает на запрос curl"'
-   	     		}
-  	  }		
+		}	
 	}
 }
