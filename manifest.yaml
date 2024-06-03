@@ -97,6 +97,8 @@ spec:
     metadata:
       labels:
         app: webapp  # Метка для подов деплоймента
+      annotation:
+        fluentd.active: 'true'
     spec:
       containers:
         - name: webapp  # Имя контейнера
