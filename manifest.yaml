@@ -97,7 +97,7 @@ spec:
     metadata:
       labels:
         app: webapp  # Метка для подов деплоймента
-      annotation:
+      annotations:
         fluentd.active: 'true'
     spec:
       containers:
