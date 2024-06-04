@@ -113,7 +113,7 @@ spec:
             - name: shared-data
               mountPath: /var/www/html
         - name: php
-          image: php:8.2-fpm
+          image: php:7.2-fpm
           ports:
               - containerPort: 9000
           volumeMounts:
