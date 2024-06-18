@@ -133,30 +133,8 @@ spec:
       volumes:
         - name: shared-data # Имя тома
           emptyDir: {}
----
 
-
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: webapp-hpa
-  namespace: webapp-namespace
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: webapp
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: AverageValue
-        averageValue: 300Mi
-
----
+----------
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
