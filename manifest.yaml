@@ -134,7 +134,7 @@ spec:
         - name: shared-data # Имя тома
           emptyDir: {}
 
-----------
+---
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress
