@@ -27,6 +27,8 @@ pipeline {
 				sh 'cp manifest.yaml manifest_prod.yaml'
 				sh 'sed -i "s/BuildNumber/$BUILD_NUMBER/g" manifest_prod.yaml'
 				sh 'kubectl apply -f manifest_prod.yaml'
+				sh 'kubectl apply -f redis-manifest.yaml'
+				sh 'curl -X POST "https://api.telegram.org/bot6991480940:AAGM38za6G7f6d8gZT5jirGRBZe2ICeXjL0/sendMessage" -d "chat_id=1341857329&text=Задеплоен Redis"'
 				sh 'curl -X POST "https://api.telegram.org/bot6991480940:AAGM38za6G7f6d8gZT5jirGRBZe2ICeXjL0/sendMessage" -d "chat_id=1341857329&text=билд под номером:$BUILD_NUMBER был успешно задеплоен в кластер kubernetes желаем вам удачи! \n ----------"'
 			}
 		}	
