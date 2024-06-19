@@ -12,7 +12,7 @@ metadata:
   namespace: redis
 spec:
   type: LoadBalancer
-  ports: 80
+  ports: 5540
     - port: 
       targetPort: 5540
   selector:
