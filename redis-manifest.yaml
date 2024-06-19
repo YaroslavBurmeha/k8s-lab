@@ -12,8 +12,8 @@ metadata:
   namespace: redis
 spec:
   type: LoadBalancer
-  ports:
-    - port: 5540
+  ports: 80
+    - port: 
       targetPort: 5540
   selector:
     app: redisinsight
