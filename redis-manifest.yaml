@@ -17,7 +17,9 @@ spec:
       targetPort: 5540
   selector:
     app: redisinsight
+
 ---
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -31,7 +33,9 @@ spec:
   resources:
     requests:
       storage: 2Gi
+
 ---
+
 # Redis Insight deployment with name 'redisinsight'
 apiVersion: apps/v1
 kind: Deployment

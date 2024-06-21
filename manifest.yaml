@@ -1,110 +1,106 @@
-apiVersion: v1  # Версия API Kubernetes
-kind: Namespace  # Тип ресурса - пространство имен
+apiVersion: v1  
+kind: Namespace
 metadata:
-  name: webapp-namespace  # Имя создаваемого пространства имен
-
+  name: webapp-namespace
 ---
 
-apiVersion: v1  # Версия API Kubernetes
-kind: Service  # Тип ресурса - сервис
+apiVersion: v1
+kind: Service 
 metadata:
-  name: database  # Имя сервиса базы данных
-  namespace: webapp-namespace  # Пространство имен, в котором сервис будет создан
+  name: database  
+  namespace: webapp-namespace 
 spec:
   selector:
-    app: database  # Выбор подов с меткой "app: database"
+    app: database
   ports:
-    - protocol: TCP  # Протокол TCP
-      port: 3306  # Порт доступа к сервису
-      targetPort: 3306  # Порт, на котором поды базы данных слушают
-
+    - protocol: TCP
+      port: 3306  
+      targetPort: 3306 
 ---
 
-apiVersion: v1  # Версия API Kubernetes
-kind: PersistentVolumeClaim  # Тип ресурса - запрос на постоянный том
+apiVersion: v1 
+kind: PersistentVolumeClaim  
 metadata:
-  name: database-pvc  # Имя запроса на постоянный том
-  namespace: webapp-namespace  # Пространство имен, где запрос будет создан
+  name: database-pvc  
+  namespace: webapp-namespace  
 spec:
   accessModes:
-    - ReadWriteOnce  # Режим доступа к тому - чтение/запись одновременно
+    - ReadWriteOnce 
   resources:
     requests:
-      storage: 1Gi  # Запрашиваемый объем хранилища - 1 гигабайт
+      storage: 1Gi 
 
 ---
 
-apiVersion: apps/v1  # Версия API Kubernetes
-kind: Deployment  # Тип ресурса - деплоймент
+apiVersion: apps/v1 
+kind: Deployment 
 metadata:
-  name: database  # Имя деплоймента базы данных
-  namespace: webapp-namespace  # Пространство имен, где деплоймент будет создан
+  name: database 
+  namespace: webapp-namespace 
 spec:
-  replicas: 1  # Количество реплик (подов) - 1
+  replicas: 1 
   selector:
     matchLabels:
-      app: database  # Выбор подов с меткой "app: database" для управления ими
+      app: database 
   template:
     metadata:
       labels:
-        app: database  # Метка для подов деплоймента
+        app: database
     spec:
       containers:
-        - name: database  # Имя контейнера
-          image: mysql:latest  # Образ контейнера MySQL
+        - name: database 
+          image: mysql:latest 
           env:
-            - name: MYSQL_ROOT_PASSWORD  # Переменная окружения с паролем root пользователя MySQL
-              value: "your_root_password"  # Значение переменной окружения - ваш пароль
+            - name: MYSQL_ROOT_PASSWORD  
+              value: "your_root_password" 
           ports:
-            - containerPort: 3306  # Порт контейнера, на котором MySQL слушает
+            - containerPort: 3306  
           volumeMounts:
-            - name: database-storage  # Имя примонтированного тома
-              mountPath: /var/lib/mysql  # Путь монтирования для хранения данных MySQL
+            - name: database-storage  
+              mountPath: /var/lib/mysql 
       volumes:
-        - name: database-storage  # Имя тома
+        - name: database-storage 
           persistentVolumeClaim:
-            claimName: database-pvc  # Имя PersistentVolumeClaim для хранения данных
+            claimName: database-pvc 
 
 ---
 
-apiVersion: v1  # Версия API Kubernetes
-kind: Service  # Тип ресурса - сервис
+apiVersion: v1 
+kind: Service 
 metadata:
-  name: webapp  # Имя сервиса веб-приложения
-  namespace: webapp-namespace  # Пространство имен, в котором сервис будет создан
+  name: webapp  
+  namespace: webapp-namespace  
 spec:
   selector:
-    app: webapp  # Выбор подов с меткой "app: webapp"
+    app: webapp 
   ports:
-    - protocol: TCP  # Протокол TCP
-      port: 80  # Порт доступа к веб-приложению
-      targetPort: 80  # Порт, на котором веб-приложение слушает
+    - protocol: TCP  
+      port: 80  
+      targetPort: 80 
   type: ClusterIP
 
 ---
 
-apiVersion: apps/v1  # Версия API Kubernetes
-kind: Deployment  # Тип ресурса - деплоймент
+apiVersion: apps/v1 
+kind: Deployment 
 metadata:
-  name: webapp  # Имя деплоймента веб-приложения
-  namespace: webapp-namespace  # Пространство имен, где деплоймент будет создан
+  name: webapp  
+  namespace: webapp-namespace  
 spec:
-  replicas: 3  # Количество реплик (подов) - 1
+  replicas: 3  
   selector:
     matchLabels:
-      app: webapp  # Выбор подов с меткой "app: webapp" для управления ими
+      app: webapp  
   template:
     metadata:
       labels:
-        app: webapp  # Метка для подов деплоймента
-      annotations:
-        fluentd.active: 'true'
+        app: webapp
     spec:
       containers:
-        - name: webapp  # Имя контейнера
-          image: 192.168.59.250:5000/app:BuildNumber # Образ контейнера с вашим приложением
+        - name: webapp  
+          image: 192.168.59.250:5000/app:BuildNumber 
           ports:
-            - containerPort: 80  # Порт контейнера, на котором приложение слушает
+            - containerPort: 80  
           lifecycle:
             postStart:
               exec:
