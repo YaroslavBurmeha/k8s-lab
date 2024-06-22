@@ -139,7 +139,7 @@ metadata:
   namespace: webapp-namespace
 spec:
   rules:
-  - host: k8snode1.navbahorholding.uz
+  - host: trevico.navbahorholding.uz
     http:
       paths:
       - path: /
